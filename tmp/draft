@@ -1,0 +1,30 @@
+PREROUTING
+
+raw---invoke helper module accorindly
+mangle---mark particular packets
+nat---redirect particular packets to ports
+filter---no.
+
+INPUT
+raw---no
+mangle---no
+nat---no
+filter---accept lo, accept RELATED,ESTABLISHED, accept bridge DNAT, accept bridge NEW,UNTRACKED 
+
+OUTPUT
+raw---no
+mangle---no
+nat---redirect router's packets
+filter---accept lo, accept RELATED,ESTABLISHED, accept bridge
+
+FORWARD
+raw---no
+mangle---set MTU on bridge OUTPUT
+nat---no
+filter---accept RELATED,ESTABLISHED, accept bridge in, DNAT, accept bridge out.
+
+POSTROUTING
+raw---no
+mangle---no
+nat---accept bridge out
+filter---no

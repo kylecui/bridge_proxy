@@ -1,0 +1,9 @@
+server {
+	listen	127.0.0.1:8899;
+	location / {
+	
+		set $args "foo=1&bar=2&from=nginx";
+		proxy_pass http://192.168.88.124/;
+	}
+
+}
